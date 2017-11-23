@@ -4,7 +4,7 @@ browser.maximize_window()
 browser.get('https://www.tianyancha.com/login')
 print('please login and press enter...')
 input()
-start_oc = 18
+start_oc = 1
 for i in range(start_oc, 97):
     file = open('company_list/company_' + '{:02d}'.format(i) + '.txt', 'w')
     for j in range(1, 6):
@@ -21,6 +21,7 @@ for i in range(start_oc, 97):
                 if flag:
                     print('can not find any company url, press enter to move on...')
                     input()
+                    flag = False
                 else:
                     print('still can not find any url, skip current url...')
                     break
