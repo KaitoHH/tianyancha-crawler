@@ -2,7 +2,7 @@ from selenium import webdriver
 browser = webdriver.Chrome()
 browser.maximize_window()
 browser.get('https://www.tianyancha.com/login')
-print('please login and press enter...')
+print('please login and press enter...', end='')
 input()
 start_oc = 1
 for i in range(start_oc, 97):
@@ -19,7 +19,7 @@ for i in range(start_oc, 97):
                 file.write(a.get_attribute("href") + '\n')
             if not elements:
                 if flag:
-                    print('can not find any company url, press enter to move on...')
+                    print('can not find any company url, press enter to move on...', end='')
                     input()
                     flag = False
                 else:
