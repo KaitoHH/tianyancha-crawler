@@ -18,12 +18,14 @@ def getCompanyInfo(company_id):
     return result
 
 
+f = open('company_list/company_01.txt', 'r')
 browser = webdriver.Chrome()
 browser.maximize_window()
-browser.set_window_position(-10000, 0)
+# browser.set_window_position(-10000, 0)
 
-company_id = 720901373
-result = getCompanyInfo(company_id)
-
-with open('info.txt', 'a', encoding='utf-8') as file:
-    file.write('\n'.join(result))
+for line in f.readlines():
+    company_id = re.findall(r'(\d+)', line)[0]
+    print(company_id)
+    result = getCompanyInfo(company_id)
+    with open('info.txt', 'a', encoding='utf-8') as file:
+        file.write('\n'.join(result))
