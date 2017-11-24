@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 import csv
 import io
 import re
@@ -21,15 +23,32 @@ def getCompanyInfo(url):
             print('can not find specific element, fix it and press enter...', end='')
             input()
             retry = True
-    try:
-        element = browser.find_element_by_xpath(
-            '//*[@id="_container_holder"]/div/table/tbody')
-    except:
-        return None
-    spt = element.text.split('\n')
-    groups = [[company_name] + spt[x:x + 1] + spt[x + 2:x + 4]
-              for x in range(0, len(spt), 4)]
-    return groups
+    groups = []
+    page = 1
+    count = 0
+    while True:
+        count += 1
+        try:
+            name = browser.find_element_by_xpath(
+                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[1]/a'.format(count)).text
+            precent = browser.find_element_by_xpath(
+                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[2]/div/div/span'.format(count)).text
+            amount = browser.find_element_by_xpath(
+                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[3]/div/span[1]'.format(count)).text
+            groups.append([company_name, name, precent, amount])
+        except:
+            page += 1
+            try:
+                target = '//*[@id="_container_holder"]/div/div/ul/li[{:d}]/a'.format(
+                    page + 1)
+                element = browser.find_element_by_xpath(target)
+                actions = ActionChains(browser)
+                actions.move_to_element(element).send_keys(
+                    Keys.DOWN).send_keys(Keys.DOWN).pause(1).perform()
+                element.click()
+                count = 0
+            except:
+                return groups
 
 
 browser = webdriver.Chrome()
