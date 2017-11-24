@@ -1,9 +1,8 @@
 from selenium import webdriver
+import utils
 browser = webdriver.Chrome()
 browser.maximize_window()
-browser.get('https://www.tianyancha.com/login')
-print('please login and press enter...', end='')
-input()
+utils.auto_login(browser)
 start_oc = 1
 for i in range(start_oc, 97):
     file = open('company_list/company_' + '{:02d}'.format(i) + '.txt', 'w')
