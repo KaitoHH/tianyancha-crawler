@@ -1,4 +1,4 @@
-/company_list
+/company_*
 /__pycache__
 *.log
 *.json
