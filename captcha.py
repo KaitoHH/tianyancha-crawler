@@ -31,7 +31,10 @@ def get_captcha(browser):
         result = api.post()
         result = json.loads(result)
         print(result)
-        pos = result['data']['val'].split('|')
+        try:
+            pos = result['data']['val'].split('|')
+        except:
+            continue
         for point in pos:
             x, y = point.split(',')
             click(browser, imgB, int(x), int(y))
