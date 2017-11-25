@@ -4,11 +4,13 @@ from selenium.webdriver.common.keys import Keys
 import csv
 import utils
 import time
+import captcha
 
 
 def getCompanyInfo(url):
     print(url)
     browser.get(url)
+    captcha.get_captcha(browser)
     retry = False
     while True:
         try:
@@ -20,9 +22,9 @@ def getCompanyInfo(url):
                 print('still failed to find element, skip current page...')
                 return None
             print(
-                'can not find specific element, fix it and press enter...',
+                'can not find specific element, retry...',
                 end='')
-            input()
+            # input()
             retry = True
     groups = []
     next_page = 2

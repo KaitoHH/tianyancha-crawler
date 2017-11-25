@@ -1,6 +1,8 @@
 /company_*
 /__pycache__
 *config.py
+api.py
 *.log
 *.json
 *.txt
+*.png
