@@ -10,7 +10,9 @@ import captcha
 def getCompanyInfo(url):
     print(url)
     browser.get(url)
-    captcha.get_captcha(browser)
+    if not captcha.get_captcha(browser):
+        print('fatal error! program paused...')
+        input()
     retry = False
     while True:
         try:
@@ -21,9 +23,7 @@ def getCompanyInfo(url):
             if retry:
                 print('still failed to find element, skip current page...')
                 return None
-            print(
-                'can not find specific element, retry...',
-                end='')
+            print('can not find specific element, retry...', end='')
             # input()
             retry = True
     groups = []

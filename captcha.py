@@ -14,12 +14,14 @@ def click(browser, element, x, y):
 
 
 def get_captcha(browser):
+    fail_count = -1
     while True:
         time.sleep(1)
         try:
             imgA = browser.find_element_by_xpath('//*[@id="targetImgie"]')
+            fail_count += 1
         except:
-            return
+            return True
         print('captcha found!')
         imgB = browser.find_element_by_xpath('//*[@id="bgImgie"]')
         urllib.request.urlretrieve(imgA.get_attribute('src'), 'A.png')
@@ -36,3 +38,5 @@ def get_captcha(browser):
             time.sleep(0.3)
         submit = browser.find_element_by_xpath('//*[@id="submitie"]')
         submit.click()
+        if fail_count >= 10:
+            return False
