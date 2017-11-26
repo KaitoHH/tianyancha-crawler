@@ -14,9 +14,11 @@ def click(browser, element, x, y):
 
 
 def get_captcha(browser):
-    fail_count = -1
+    fail_count = 0
     while True:
         time.sleep(1)
+        if fail_count > 0:
+            time.sleep(2)
         try:
             imgA = browser.find_element_by_xpath('//*[@id="targetImgie"]')
             fail_count += 1
@@ -34,6 +36,8 @@ def get_captcha(browser):
         try:
             pos = result['data']['val'].split('|')
         except:
+            print('request error! refreshing...')
+            browser.refresh()
             continue
         for point in pos:
             x, y = point.split(',')

@@ -64,10 +64,10 @@ def getCompanyInfo(url):
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 options.add_argument('disable-gpu')
-options.add_argument('window-size=1920x1080')
+options.add_argument('window-size=1920,1080')
 browser = webdriver.Chrome(chrome_options=options)
 utils.auto_login(browser)
-start_oc = 42
+start_oc = 1
 for i in range(start_oc, 97):
     f = open('company_list/company_{:02d}.txt'.format(i), 'r')
     for line in f.readlines():
