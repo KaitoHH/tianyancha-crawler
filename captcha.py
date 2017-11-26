@@ -1,7 +1,6 @@
 from selenium.webdriver.common.action_chains import ActionChains
 import urllib.request
 import time
-import base64
 import json
 import image
 import api

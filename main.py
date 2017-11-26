@@ -33,19 +33,19 @@ def getCompanyInfo(url):
         count += 1
         try:
             name = browser.find_element_by_xpath(
-                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[1]/a'.
-                format(count)).text
+                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[1]/'
+                'a'.format(count)).text
             precent = browser.find_element_by_xpath(
-                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[2]/div/div/span'.
-                format(count)).text
+                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[2]/'
+                'div/div/span'.format(count)).text
             amount = browser.find_element_by_xpath(
-                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[3]/div/span[1]'.
-                format(count)).text
+                '//*[@id="_container_holder"]/div/table/tbody/tr[{:d}]/td[3]/'
+                'div/span[1]'.format(count)).text
             groups.append([company_name, name, precent, amount])
         except:
             try:
-                target = '//*[@id="_container_holder"]/div/div/ul/li[{:d}]/a'.format(
-                    next_page + 1)
+                target = '//*[@id="_container_holder"]/div/div/ul/li[{:d}]/a'\
+                         .format(next_page + 1)
                 element = browser.find_element_by_xpath(target)
                 next_page = int(element.text) + 1
 
