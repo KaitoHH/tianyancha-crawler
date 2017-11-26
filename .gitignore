@@ -6,3 +6,4 @@ api.py
 *.json
 *.txt
 *.png
+!hint.png
