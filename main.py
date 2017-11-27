@@ -51,8 +51,8 @@ def getCompanyInfo(url):
 
                 # scroll down
                 actions = ActionChains(browser)
-                actions.move_to_element(element).send_keys(
-                    Keys.DOWN).send_keys(Keys.DOWN).pause(1).perform()
+                actions.move_to_element(element).pause(0.3).perform()
+                browser.execute_script('scrollBy(0, 250)')
                 element.click()
 
                 time.sleep(1)
